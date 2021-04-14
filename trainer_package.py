@@ -65,7 +65,7 @@ def trainer(input_hdf5=None,
             gpuid=None,
             gpu_limit=None,
             use_multiprocessing=True,
-            model=cred2):
+            model_select=cred2):
         
     """
     
@@ -231,7 +231,8 @@ def trainer(input_hdf5=None,
     "number_of_gpus": number_of_gpus,           
     "gpuid": gpuid,
     "gpu_limit": gpu_limit,
-    "use_multiprocessing": use_multiprocessing
+    "use_multiprocessing": use_multiprocessing,
+    "model_select": model_select
     }
                        
     def train(args):
@@ -415,7 +416,7 @@ def _build_model(args):
     """       
     
     inp = Input(shape=args['input_dimention'], name='input') 
-    model = model(nb_filters=[8, 16, 16, 32, 32, 64, 64],
+    model = model_select(nb_filters=[8, 16, 16, 32, 32, 64, 64],
               kernel_size=[11, 9, 7, 7, 5, 5, 3],
               padding=args['padding'],
               activationf =args['activation'],
