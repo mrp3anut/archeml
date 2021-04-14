@@ -1450,16 +1450,4 @@ class both_open():
             optimizer=Adam(lr=_lr_schedule(0)), metrics=[f1])
 
         return model
-
-        
-
-
-
-
-
-
-
-
-    
-    
     
