@@ -28,6 +28,14 @@ deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 from obspy.signal.tf_misfit import cwt
 
+def _block_LSTM(filters, drop_rate, padding, inpR):
+    'Returns LSTM block'    
+    prev = inpR
+    x_rnn = LSTM(filters, return_sequences=True, dropout=drop_rate, recurrent_dropout=drop_rate)(prev)
+    NiN = Conv1D(filters, 1, padding = padding)(x_rnn)     
+    res_out = BatchNormalization()(NiN)
+    return res_out
+
 
 class mrp3anut():
     
@@ -1388,7 +1396,7 @@ class both_open():
             x = _block_BiLSTM(self.nb_filters[1], self.drop_rate, self.padding, x)
             
         for ls in range(self.BiLSTM_blocks):
-            x = _block_BiLSTM(self.nb_filters[1], self.drop_rate, self.padding, x)         
+            x = _block_LSTM(self.nb_filters[1], self.drop_rate, self.padding, x)         
             
         x, weightdD0 = _transformer(self.drop_rate, None, 'attentionD0', x)             
         encoded, weightdD = _transformer(self.drop_rate, None, 'attentionD', x)             
