@@ -31,6 +31,10 @@ from tqdm import tqdm
 from tensorflow.python.util import deprecation
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 
+yunus_nb_filters = [8, 8, 32, 32, 128, 128, 128]
+yunus_kernel_size = [10, 9, 8, 7, 6, 5, 4]
+
+
 
 def trainer(input_hdf5=None,
             input_csv=None,
