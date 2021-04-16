@@ -22,19 +22,10 @@ from keras.models import Model
 from keras.utils import multi_gpu_model
 from keras.optimizers import Adam
 from obspy.signal.trigger import trigger_onset
-import matplotlib
 from tensorflow.python.util import deprecation
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 from obspy.signal.tf_misfit import cwt
-
-def _block_LSTM(filters, drop_rate, padding, inpR):
-    'Returns LSTM block'    
-    prev = inpR
-    x_rnn = LSTM(filters, return_sequences=True, dropout=drop_rate, recurrent_dropout=drop_rate)(prev)
-    NiN = Conv1D(filters, 1, padding = padding)(x_rnn)     
-    res_out = BatchNormalization()(NiN)
-    return res_out
 
 
 class mrp3anut():
@@ -926,7 +917,7 @@ class mrp3anut_lstm2():
 
         return model
     
-        
+#EARTHML UPDATE: The Bidirectional LSTM block removed and LSTM (unidirectional) block added to the place of BiLSTM block.
 class bclos():
     
     """ 
@@ -1104,7 +1095,8 @@ class bclos():
 
         return model
 
-    
+
+#EARTHML UPDATE: The Bidirectional LSTM block removed.
 class both_closed():
     
     """ 
@@ -1279,7 +1271,8 @@ class both_closed():
 
         return model
 
-        
+    
+#EARTHML UPDATE: There is an addtional LSTM (unidirectional) block right after Bidirectional Lstm block. 
 class both_open():
     
     """ 
