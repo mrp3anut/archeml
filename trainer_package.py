@@ -26,6 +26,7 @@ import shutil
 import multiprocessing
 from .EqT_utils import DataGenerator, _lr_schedule, cred2, PreLoadGenerator, data_reader
 from .models import mrp3anut, mrp3anut_salvation, mrp3anut_genesis, mrp3anut_vanilla, mrp3anut_lstm2, bclos, both_closed, both_open
+from .layers import _block_LSTM
 import datetime
 from tqdm import tqdm
 from tensorflow.python.util import deprecation
@@ -708,6 +709,7 @@ def _document_training(history, model, start_training, end_training, save_dir, s
         the_file.write('input_hdf5: '+str(args['input_hdf5'])+'\n')            
         the_file.write('input_csv: '+str(args['input_csv'])+'\n')
         the_file.write('output_name: '+str(args['output_name']+'_outputs')+'\n')  
+        the_file.write('model_select: '+str(args['model_select']+'/n')
         the_file.write('================== Model Parameters ========================='+'\n')   
         the_file.write('input_dimention: '+str(args['input_dimention'])+'\n')
         the_file.write('cnn_blocks: '+str(args['cnn_blocks'])+'\n')
