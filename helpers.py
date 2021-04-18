@@ -1,25 +1,28 @@
 import h5py
 import numpy as np
 import pandas as pd
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 def resizer(data,csv,size):
 
 	#STEAD downsizer like code
 	
     #read csv and hdf5 files
-    csv = csv
-    stead = data
+    csv = pd.read_csv(csv)
+    stead = h5py.File(data,'r')
     
     #take the group object inside the file
     chunk = stead['data']
     
     #shuffle csv to randomize trace_name order and save the resultig csv
     shuffled_csv = csv.sample(frac=1).reset_index(drop=True)
-    shuffled_csv.to_csv("steadmini_{}.csv".format(size))
+    shuffled_csv[:len(shuffled_csv)//(100//size)].to_csv("steadmini_{}.csv".format(size))
     
     #export the 10% fo trace names out of the shuffled csv 
-    ev_list = shuffled_csv['trace_name'].to_list()[:int(len(chunk))//(100/size)] 
+    ev_list = shuffled_csv['trace_name'].to_list()[:int(len(chunk)//(100//size))] 
     
+    print(int(len(chunk)//(100//size)))
+    print(len(ev_list))
     #create a new hdf5 file
     steadmini_c = h5py.File('steadmini_{}.hdf5'.format(size),'w')
     
@@ -33,7 +36,6 @@ def resizer(data,csv,size):
     #cclose the file to save the new file
     steadmini_c.close()
 
-	return
 
 def visualizer(model, input_hdf5, input_csv, layers_to_visualize):
 
@@ -121,7 +123,6 @@ def result_metrics(models_and_test_results_csv_dict):
 	model_test = model_test.drop("index",axis=1)
 	model_test.to_csv("test_results.csv",index=False) 
 
-	return
 
 def compare(result_catalog_csv, model_to_compare_to='EQT'):
 
@@ -148,7 +149,6 @@ def compare(result_catalog_csv, model_to_compare_to='EQT'):
 	    for parameter in better_list:
 	          print(parameter)
 
-	return
 
 
 
