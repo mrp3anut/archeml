@@ -30,6 +30,10 @@ from obspy.signal.tf_misfit import cwt
 from .layers import _block_LSTM, _block_BiGRU
 
 
+nb_filters = [8, 8, 32, 32, 128, 128, 128]  #The filter size which used for nb_filter_changed model during experiments.
+kernel_size = [10, 9, 8, 7, 6, 5, 4]    #The kernel size which used for kernel_size_changed model during experiments.
+
+
 class mrp3anut():
     
     """ 
