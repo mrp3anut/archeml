@@ -24,16 +24,15 @@ import time
 import os
 import shutil
 import multiprocessing
-from .EqT_utils import DataGenerator, _lr_schedule, cred2, PreLoadGenerator, data_reader
-from .models import mrp3anut, mrp3anut_salvation, mrp3anut_genesis, mrp3anut_vanilla, mrp3anut_lstm2, bclos, both_closed, both_open
+from EQTransformer.core.EqT_utils import DataGenerator, _lr_schedule, cred2, PreLoadGenerator, data_reader
 import datetime
 from tqdm import tqdm
 from tensorflow.python.util import deprecation
+from archml.models import mrp3anut, mrp3anut_genesis, mrp3anut_vanilla, mrp3anut_lstm2, bclos, both_closed, both_open
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 yunus_nb_filters = [8, 8, 32, 32, 128, 128, 128]
 yunus_kernel_size = [10, 9, 8, 7, 6, 5, 4]
-
 
 
 def trainer(input_hdf5=None,
@@ -236,7 +235,7 @@ def trainer(input_hdf5=None,
     "gpuid": gpuid,
     "gpu_limit": gpu_limit,
     "use_multiprocessing": use_multiprocessing,
-    "model_select": model_select
+    "model_select":model_select
     }
                        
     def train(args):
@@ -418,7 +417,8 @@ def _build_model(args):
         Compiled model.
         
     """       
-    
+    model_select = args['model_select']
+
     inp = Input(shape=args['input_dimention'], name='input') 
     model = model_select(nb_filters=[8, 16, 16, 32, 32, 64, 64],
               kernel_size=[11, 9, 7, 7, 5, 5, 3],
@@ -463,8 +463,7 @@ def _split(args, save_dir):
     """       
     
     df = pd.read_csv(args['input_csv'])
-    ev_list = df.trace_name.tolist() 
-    np.random.seed(seed=69)   
+    ev_list = df.trace_name.tolist()    
     np.random.shuffle(ev_list)     
     training = ev_list[:int(args['train_valid_test_split'][0]*len(ev_list))]
     validation =  ev_list[int(args['train_valid_test_split'][0]*len(ev_list)):
@@ -708,7 +707,6 @@ def _document_training(history, model, start_training, end_training, save_dir, s
         the_file.write('input_hdf5: '+str(args['input_hdf5'])+'\n')            
         the_file.write('input_csv: '+str(args['input_csv'])+'\n')
         the_file.write('output_name: '+str(args['output_name']+'_outputs')+'\n')  
-        the_file.write('model_select: '+str(args['model_select']+'/n')
         the_file.write('================== Model Parameters ========================='+'\n')   
         the_file.write('input_dimention: '+str(args['input_dimention'])+'\n')
         the_file.write('cnn_blocks: '+str(args['cnn_blocks'])+'\n')

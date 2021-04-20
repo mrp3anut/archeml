@@ -148,6 +148,7 @@ def compare(result_catalog_csv, model_to_compare_to='EQT'):
 	    print("{} performed better than EQT tranied w/ STEADmini on {} parameters:".format(name,len(better_list)))
 	    for parameter in better_list:
 	          print(parameter)
+	return parameter
 
 
 
