@@ -31,8 +31,7 @@ from tensorflow.python.util import deprecation
 from archml.models import mrp3anut, mrp3anut_genesis, mrp3anut_vanilla, mrp3anut_lstm2, bclos, both_closed, both_open
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 
-yunus_nb_filters = [8, 8, 32, 32, 128, 128, 128]
-yunus_kernel_size = [10, 9, 8, 7, 6, 5, 4]
+
 
 
 def trainer(input_hdf5=None,
