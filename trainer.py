@@ -433,7 +433,7 @@ def _build_model(args):
               multi_gpu=args['multi_gpu'], 
               gpu_number=args['number_of_gpus'],  
                )(inp)  
-    model.summary()  
+    #model.summary()
     return model  
     
 

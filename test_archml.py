@@ -1,14 +1,15 @@
 import pandas as pd
 import numpy as np
 import os
-from EQTransformer.core.EqT_utils import cred2
+from keras.models import load_model
+from EQTransformer.core.EqT_utils import f1, SeqSelfAttention, FeedForward, LayerNormalization
 import trainer as eqtt
 from archml.helpers import resizer, result_metrics, compare
 from archml.models import mrp3anut
 
 
 
-def test_models():
+def extract_model_name():
 
 	input_hdf5=None
 	input_csv=None
@@ -84,8 +85,7 @@ def test_models():
 
 	model = eqtt._build_model(args_dict)
 
-
-	assert len(model.layers) == 142
+	return model
 
 
 
@@ -124,3 +124,30 @@ def test_compare():
 
 
 
+def test_layers():
+
+	NUM_OF_LAYERS = {
+		"model_1": 151,
+		"cred2": 300,
+		"mrp3anut_genesis": 400,
+		"mrp3anut_vanilla": 500,
+		"mrp3anut_gru": 150,
+		"mrp3anut_lstm2": 250,
+		"bclos": 350,
+		"both_open": 550}
+
+	model_name = extract_model_name().name
+
+
+
+	model = load_model( "ModelsAndSampleData/EqT_model.h5", custom_objects={'SeqSelfAttention': SeqSelfAttention,
+											  								'FeedForward': FeedForward,
+											  								'LayerNormalization': LayerNormalization,
+											  								'f1': f1} )
+	x = len( model.layers )
+
+	# x = load_model( "ModelsAndSampleData/EqT_model.h5")
+
+	y = [value for (key, value) in NUM_OF_LAYERS.items() if key == "{}".format(model_name)]
+
+	assert x == y[0]
