@@ -3,7 +3,7 @@ import os
 from keras.models import load_model
 from EQTransformer.core.EqT_utils import f1, SeqSelfAttention, FeedForward, LayerNormalization
 import trainer as eqtt
-from archml.models import mrp3anut
+from archml.models import bilstm_closed
 
 
 def extract_model_name():
@@ -40,7 +40,7 @@ def extract_model_name():
     gpuid = None
     gpu_limit = None
     use_multiprocessing = True
-    model_select = mrp3anut
+    model_select = bilstm_closed
 
     args_dict = {
         "input_hdf5": input_hdf5,
@@ -106,7 +106,7 @@ def test_number_of_layers_():
     #model_1 corresponds to original eqt
     NUM_OF_LAYERS = {
         "model_1": 151,
-        "mrp3anut": 200,
+        "bilstm_closed": 200,
         "mrp3anut_genesis": 400,
         "mrp3anut_vanilla": 500,
         "mrp3anut_gru": 150,

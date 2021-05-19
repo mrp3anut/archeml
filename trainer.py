@@ -1,13 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 25 17:44:14 2018
-
-@author: mostafamousavi
-last update: 06/25/2020
-
-"""
-
 from __future__ import print_function
 import keras
 from keras import backend as K
@@ -28,10 +18,8 @@ from EQTransformer.core.EqT_utils import DataGenerator, _lr_schedule, cred2, Pre
 import datetime
 from tqdm import tqdm
 from tensorflow.python.util import deprecation
-from archml.models import mrp3anut, mrp3anut_genesis, mrp3anut_vanilla, mrp3anut_lstm2, bclos, both_closed, both_open
+from archml.models import bilstm_closed, genesisLSTM, vanilla, lstm2, gru, bi_switch, bi_plus_lstm
 deprecation._PRINT_DEPRECATION_WARNINGS = False
-
-
 
 
 def trainer(input_hdf5=None,

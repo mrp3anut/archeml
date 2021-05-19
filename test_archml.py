@@ -4,7 +4,7 @@ import os
 from EQTransformer.core.EqT_utils import cred2
 import trainer as eqtt
 from archml.helpers import resizer, result_metrics, compare
-from archml.models import mrp3anut
+from archml.models import bilstm_closed
 
 
 
@@ -43,7 +43,7 @@ def test_models():
 	gpuid=None
 	gpu_limit=None
 	use_multiprocessing=True
-	model_select = mrp3anut
+	model_select = bilstm_closed
 	
 	args_dict = {
 	"input_hdf5": input_hdf5,
@@ -85,7 +85,7 @@ def test_models():
 	model = eqtt._build_model(args_dict)
 
 
-	assert len(model.layers) == 142
+	assert len(model.layers) == 142 #97
 
 
 
