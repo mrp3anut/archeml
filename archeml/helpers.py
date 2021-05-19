@@ -19,7 +19,6 @@ def resize(hdf5_data, eq_catalog, size, output_name):
 	Outputs resized annd shuffled verisons of the original hdf5 object and pandas dataframe.
 	Size can take integer values between 0 and 100.'''
 
-    #take the group object inside the file
     data = hdf5_data['data']
     
     #shuffle csv to randomize trace_name order and save the resultig csv
@@ -63,12 +62,18 @@ def metrics(test_results_dict):
 
             earthquakes = test_results_dict[model][test_results_dict[model]["trace_category"] == "earthquake_local"]
             event = len(earthquakes)
+
+            # The model fills the catalog with NaN values when it fails to perdict.
+
             nan_pred_event = earthquakes[earthquakes["{}".format(probability)].isnull()]
             FN = len(nan_pred_event)
             TP = event-FN
             
             noise = test_results_dict[model][test_results_dict[model]["trace_category"] == "noise"]
             not_event = len(noise)
+
+            # The model fills the catalog with NaN values when it fails to perdict.
+
             nan_pred_noise = noise[noise["{}".format(probability)].isnull()]
             TN = len(nan_pred_noise)
             FP = not_event-TN
@@ -76,6 +81,7 @@ def metrics(test_results_dict):
             recall = TP/(TP+FN)
             precision = TP/(TP+FP)
             
+            #Dropping the NaN values rows for P and S pick in order to calculate the error in arrival time and picking time.
             eq_dropna_p = earthquakes[~earthquakes["P_pick"].isnull()]
             eq_dropna = eq_dropna_p[~eq_dropna_p["S_pick"].isnull()]
             results.append(recall)
@@ -109,21 +115,20 @@ def metrics(test_results_dict):
 
     return result_metrics
 
-def compare(result_catalog_csv, model_to_compare_to='EQT'):
+GOOD_COLUMNS = ["det_recall","det_precision","d_tp","d_tn","p_recall","p_precision","p_tp","p_tn","s_recall","s_precision","s_tp","s_tn"]
+BAD_COLUMNS = ["d_fp","d_fn","p_fp","p_fn","s_fp","s_fn","p_mae","p_rmse","s_mae","s_rmse"]
 
-	b = result_catalog_csv
+def compare(result_catalog_csv, model_to_compare_to='EQT'): 
 
 	name_count = 0
-	good_columns = ["det_recall","det_precision","d_tp","d_tn","p_recall","p_precision","p_tp","p_tn","s_recall","s_precision","s_tp","s_tn"]
-	bad_columns = ["d_fp","d_fn","p_fp","p_fn","s_fp","s_fn","p_mae","p_rmse","s_mae","s_rmse"]
-	for name in b.model_name:
+	for name in result_catalog_csv.model_name:
     
 	    better_list = []
-	    for column in good_columns:
-	        if b[column][name_count] > b[column][0]:
+	    for column in GOOD_COLUMNS:
+	        if result_catalog_csv[column][name_count] > result_catalog_csv[column][0]:
 	            better_list.append(column)
-	    for column in bad_columns:    
-	        if b[column][name_count] < b[column][0]:
+	    for column in BAD_COLUMNS:    
+	        if result_catalog_csv[column][name_count] < result_catalog_csv[column][0]:
 	            better_list.append(column)
 	            
 	    name_count += 1
