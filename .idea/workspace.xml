@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc831484-7fdb-4959-8325-b3d718c711ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1rV8MuA1T4Ekjr3dC10Xabhmh7Q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python tests.pytest for test_number_of_layers.test_number_of_layers_">
+    <configuration name="pytest for eqt_test" type="tests" factoryName="py.test" temporary="true">
+      <module name="archml" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;eqt_test.test_shape&quot;" />
+      <option name="_new_targetType" value="&quot;CUSTOM&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_archml.test_layers" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="archml" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_archml.test_layers&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_number_of_layers.test_number_of_layers_" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="archml" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_number_of_layers.test_number_of_layers_&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_with_functions.test_compare" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="archml" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_with_functions.test_compare&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for test_with_functions.test_layers" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="archml" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_with_functions.test_layers&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.pytest for eqt_test" />
+      <item itemvalue="Python tests.pytest for test_archml.test_layers" />
+      <item itemvalue="Python tests.pytest for test_number_of_layers.test_number_of_layers_" />
+      <item itemvalue="Python tests.pytest for test_with_functions.test_compare" />
+      <item itemvalue="Python tests.pytest for test_with_functions.test_layers" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.pytest for test_number_of_layers.test_number_of_layers_" />
+        <item itemvalue="Python tests.pytest for test_with_functions.test_layers" />
+        <item itemvalue="Python tests.pytest for test_archml.test_layers" />
+        <item itemvalue="Python tests.pytest for test_with_functions.test_compare" />
+        <item itemvalue="Python tests.pytest for eqt_test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc831484-7fdb-4959-8325-b3d718c711ae" name="Default Changelist" comment="" />
+      <created>1619049851793</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619049851793</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619391149061">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1619391149061" />
+    <state x="208" y="286" key="#com.intellij.featureStatistics.actions.ShowFeatureUsageStatisticsDialog" timestamp="1619740915264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="208" y="286" key="#com.intellij.featureStatistics.actions.ShowFeatureUsageStatisticsDialog/0.0.1536.824@0.0.1536.824" timestamp="1619740915264" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1620599368760">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1620599368760" />
+    <state width="1515" height="167" key="GridCell.Tab.0.bottom" timestamp="1620757199723">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="167" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1620757199723" />
+    <state width="1515" height="167" key="GridCell.Tab.0.center" timestamp="1620757199723">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="167" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1620757199723" />
+    <state width="1515" height="167" key="GridCell.Tab.0.left" timestamp="1620757199723">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="167" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1620757199723" />
+    <state width="1515" height="167" key="GridCell.Tab.0.right" timestamp="1620757199723">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="167" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1620757199723" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1619050395241">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1619050395241" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1619050395241">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1619050395241" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1619050395241">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1619050395241" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1619050395241">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1619050395241" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1620599287539">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1620599287539" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619825859281">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1619825859281" />
+  </component>
+</project>
