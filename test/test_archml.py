@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from EQTransformer.core.EqT_utils import cred2
-import trainer as eqtt
+from archml import trainer as eqtt
 from archml.helpers import resizer, result_metrics, comparison
 from archml.models import bilstm_closed
 
