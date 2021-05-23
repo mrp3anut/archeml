@@ -120,10 +120,10 @@ def metrics(test_results_dict):
 
     return result_metrics
 
-def compare(test_result_metrics_csv_path, model_to_compare_to ='EQT', output_name="comparison_catalog", output_path=None)
+def comparison(test_result_metrics_csv_path, model_to_compare_to ='EQT', output_name="comparison_catalog", output_path=None)
     
     test_result_metrics = pd.read_csv(test_result_metrics_csv_path, index_col = 0)
-    better_parameters = comparison(test_result_metrics, model_to_compare_to)
+    better_parameters = compare(test_result_metrics, model_to_compare_to)
     
     if output_path != None:
         better_parameters.to_csv("{}.csv".format(output_path)) 
@@ -134,7 +134,7 @@ def compare(test_result_metrics_csv_path, model_to_compare_to ='EQT', output_nam
 GOOD_COLUMNS = ["det_recall","det_precision","d_tp","d_tn","p_recall","p_precision","p_tp","p_tn","s_recall","s_precision","s_tp","s_tn"]
 BAD_COLUMNS = ["d_fp","d_fn","p_fp","p_fn","s_fp","s_fn","p_mae","p_rmse","s_mae","s_rmse"]
 
-def comparison(test_result_metrics, model_to_compare_to='EQT'):
+def compare(test_result_metrics, model_to_compare_to='EQT'):
 
     '''Takes a Pandas DataFrame object in the format of what metrics() returns'''
     
