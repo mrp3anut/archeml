@@ -18,7 +18,7 @@ from EQTransformer.core.EqT_utils import DataGenerator, _lr_schedule, cred2, Pre
 import datetime
 from tqdm import tqdm
 from tensorflow.python.util import deprecation
-from archml.models import bilstm_closed, genesisLSTM, vanilla, lstm2, gru, bi_switch, bi_plus_lstm
+from archeml.models import bilstm_closed, genesisLSTM, vanilla, lstm2, gru, bi_switch, bi_plus_lstm
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 

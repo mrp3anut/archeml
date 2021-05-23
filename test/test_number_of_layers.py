@@ -3,7 +3,7 @@ import os
 from keras.models import load_model
 from EQTransformer.core.EqT_utils import f1, SeqSelfAttention, FeedForward, LayerNormalization
 import trainer as eqtt
-from archml.models import bilstm_closed
+from archeml.models import bilstm_closed
 
 
 def extract_model_name():

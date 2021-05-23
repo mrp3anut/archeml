@@ -12,9 +12,9 @@ setup(
     packages=find_packages(),
     install_requires=[
     'numpy',
-    'obspy'
-    'scipy'
+    'scipy',
     'scikit-learn',
+    'obspy',
     'eqtransformer == 0.1.55'
     ], 
    )

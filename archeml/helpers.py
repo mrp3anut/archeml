@@ -5,26 +5,26 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 def resizer(hdf5_data_path, eq_catalog_csv_path, size, output_name='resized'):
 
-	eq_catalog = pd.read_csv(eq_catalog_csv_path)
+    eq_catalog = pd.read_csv(eq_catalog_csv_path)
     hdf5_data = h5py.File(hdf5_data_path,'r')
 
-    sampeld_hdf5, sampled_eq_catalog = resize(hdf5_data, eq_catalog, size, output_name)
+    sampled_hdf5, sampled_eq_catalog = resize(hdf5_data, eq_catalog, size, output_name)
 
     sampled_hdf5.close()
-    sampled_eq_catalog.to_csv('{}_{}'.format(output_name, str(size)))
+    sampled_eq_catalog.to_csv('{}_{}.csv'.format(output_name, str(size)))
 
 def resize(hdf5_data, eq_catalog, size, output_name):
 
-	''' Takes a hdf5 file and a pandas dataframe which contains info about the hdf5 file, like a catalog.
-	Outputs resized annd shuffled verisons of the original hdf5 object and pandas dataframe.
-	Size can take integer values between 0 and 100.'''
+    ''' Takes a hdf5 file and a pandas dataframe which contains info about the hdf5 file, like a catalog.
+    Outputs resized annd shuffled verisons of the original hdf5 object and pandas dataframe.
+    Size can take integer values between 0 and 100.'''
 
     data = hdf5_data['data']
     
     #shuffle csv to randomize trace_name order and save the resultig csv
-    sampled_eq_catalog = eq_catalog.sample(frac=size//100).reset_index(drop=True)
+    sampled_eq_catalog = eq_catalog.sample(frac=size/100).reset_index(drop=True)
     ev_list = sampled_eq_catalog['trace_name'].to_list()
-    sampled_hfd5 = h5py.File('{}_{}.hdf5'.format(output_name, size),'core')
+    sampled_hdf5 = h5py.File('{}_{}.hdf5'.format(output_name, size),'w')
     small_data = sampled_hdf5.create_group("data")
     
     #copy the files from the original data to the new hdf5 object using the downsized event list.
@@ -33,8 +33,8 @@ def resize(hdf5_data, eq_catalog, size, output_name):
 
     return sampled_hdf5, sampled_eq_catalog
 
-def result_metrics(test_results_dict, output_name='test_result_metrics', output_path=None)
-	
+def result_metrics(test_results_dict, output_name='test_result_metrics', output_path=None):
+    
     result_metrics = metrics(test_results_dict)
     if output_path != None:
         result_metrics.to_csv("{}.csv".format(output_path),index=False) 
@@ -43,7 +43,7 @@ def result_metrics(test_results_dict, output_name='test_result_metrics', output_
 
 
 PROBABILITIES = ["detection_probability","P_probability","S_probability"]
-TEST_COLUMNS = ["model_name","det_recall","det_precision","d_tp","d_fp","d_tn","d_fn","p_recall","p_precision","p_mae","p_rmse","p_tp","p_fp","p_tn","p_fn","s_recall","s_precision","s_mae","s_rmse","s_tp","s_fp","s_tn","s_fn","#events","#noise"]
+TEST_COLUMNS = ["model_name", "det_recall","det_precision","d_tp","d_fp","d_tn","d_fn","p_recall","p_precision","p_mae","p_rmse","p_tp","p_fp","p_tn","p_fn","s_recall","s_precision","s_mae","s_rmse","s_tp","s_fp","s_tn","s_fn","#events","#noise"]
 
 def metrics(test_results_dict):
 
@@ -52,33 +52,36 @@ def metrics(test_results_dict):
         values are pandas dataframes which contain test result csv files from EQTransformer's tester output. '''
 
     result_metrics = pd.DataFrame()
+
+
     for model in test_results_dict:
+        
         results = []
         results.append(model)
         
         for probability in PROBABILITIES:
-            TP, TN, FN, FP, event, not_event=0
-
+            TP=0
+            FP=0
+            TN=0
+            FN=0
+            event = 0
+            not_event = 0
+            
             earthquakes = test_results_dict[model][test_results_dict[model]["trace_category"] == "earthquake_local"]
             event = len(earthquakes)
-
-            # The model fills the catalog with NaN values when it fails to perdict.
             nan_pred_event = earthquakes[earthquakes["{}".format(probability)].isnull()]
             FN = len(nan_pred_event)
             TP = event-FN
             
             noise = test_results_dict[model][test_results_dict[model]["trace_category"] == "noise"]
             not_event = len(noise)
-
-            # The model fills the catalog with NaN values when it fails to perdict.
             nan_pred_noise = noise[noise["{}".format(probability)].isnull()]
             TN = len(nan_pred_noise)
             FP = not_event-TN
-
+                        
             recall = TP/(TP+FN)
             precision = TP/(TP+FP)
             
-            #Dropping the NaN values rows for P and S pick in order to calculate the error in arrival time and picking time.
             eq_dropna_p = earthquakes[~earthquakes["P_pick"].isnull()]
             eq_dropna = eq_dropna_p[~eq_dropna_p["S_pick"].isnull()]
             results.append(recall)
@@ -103,16 +106,15 @@ def metrics(test_results_dict):
             
         results.append(event)
         results.append(not_event)
-
-        result_metrics.append(pd.DataFrame(results).T)
+        result_metrics = result_metrics.append(pd.DataFrame(results).T)
         
     result_metrics.columns = TEST_COLUMNS
     result_metrics = result_metrics.reset_index()
-    result_metrics = result_metrics.drop("index", axis=1)
+    result_metrics = result_metrics.drop("index",axis=1)
 
     return result_metrics
 
-def comparison(test_result_metrics_csv_path, model_to_compare_to='EQT', output_name="comparison_catalog", output_path=None)
+def comparison(test_result_metrics_csv_path, model_to_compare_to='EQT', output_name="comparison_catalog", output_path=None):
     
     test_result_metrics = pd.read_csv(test_result_metrics_csv_path, index_col=0)
     better_parameters = compare(test_result_metrics, model_to_compare_to)
