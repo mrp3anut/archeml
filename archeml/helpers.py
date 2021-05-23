@@ -127,7 +127,7 @@ def compare(result_catalog_csv, model_to_compare_to='EQT'):
 	    for column in GOOD_COLUMNS:
 	        if result_catalog_csv[column][name_count] > result_catalog_csv[column][0]:
 	            better_list.append(column)
-	    for column in BAD_COLUMNS:    
+	    for column in BAD_COLUMNS:
 	        if result_catalog_csv[column][name_count] < result_catalog_csv[column][0]:
 	            better_list.append(column)
 	            
