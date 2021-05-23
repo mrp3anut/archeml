@@ -37,9 +37,14 @@ def resize(hdf5_data, eq_catalog, size, output_name):
 
     return sampled_hdf5, sampled_eq_catalog
 
-def result_metrics(output_name='test_result_metrics')
-	result_metrics = metrics(output_name)
-    result_metrics.to_csv("{}.csv".format(output_name),index=False) 
+def result_metrics(test_results_dict, output_name='test_result_metrics', output_path=None)
+	
+    result_metrics = metrics(test_results_dict)
+    if output_path != None:
+        result_metrics.to_csv("{}.csv".format(output_path),index=False) 
+    else:
+        result_metrics.to_csv("{}.csv".format(output_name),index=False) 
+
 
 PROBABILITIES = ["detection_probability","P_probability","S_probability"]
 TEST_COLUMNS = ["model_name","det_recall","det_precision","d_tp","d_fp","d_tn","d_fn","p_recall","p_precision","p_mae","p_rmse","p_tp","p_fp","p_tn","p_fn","s_recall","s_precision","s_mae","s_rmse","s_tp","s_fp","s_tn","s_fn","#events","#noise"]
@@ -115,28 +120,46 @@ def metrics(test_results_dict):
 
     return result_metrics
 
+def compare(test_result_metrics_csv_path, model_to_compare_to ='EQT', output_name="comparison_catalog", output_path=None)
+    
+    test_result_metrics = pd.read_csv(test_result_metrics_csv_path, index_col = 0)
+    better_parameters = comparison(test_result_metrics, model_to_compare_to)
+    
+    if output_path != None:
+        better_parameters.to_csv("{}.csv".format(output_path)) 
+    else:
+        better_parameters.to_csv("{}.csv".format(output_name)) 
+
+
 GOOD_COLUMNS = ["det_recall","det_precision","d_tp","d_tn","p_recall","p_precision","p_tp","p_tn","s_recall","s_precision","s_tp","s_tn"]
 BAD_COLUMNS = ["d_fp","d_fn","p_fp","p_fn","s_fp","s_fn","p_mae","p_rmse","s_mae","s_rmse"]
 
-def compare(result_catalog_csv, model_to_compare_to='EQT'): 
+def comparison(test_result_metrics, model_to_compare_to='EQT'):
 
-	name_count = 0
-	for name in result_catalog_csv.model_name:
+    '''Takes a Pandas DataFrame object in the format of what metrics() returns'''
     
-	    better_list = []
-	    for column in GOOD_COLUMNS:
-	        if result_catalog_csv[column][name_count] > result_catalog_csv[column][0]:
-	            better_list.append(column)
-	    for column in BAD_COLUMNS:
-	        if result_catalog_csv[column][name_count] < result_catalog_csv[column][0]:
-	            better_list.append(column)
-	            
-	    name_count += 1
-	    print("{} performed better than EQT tranied w/ STEADmini on {} parameters:".format(name,len(better_list)))
-	    for parameter in better_list:
-	    	print(parameter)
+    test_result_metrics = test_result_metrics.set_index("model_name")
+    better_parameters = pd.DataFrame(index=test_result_metrics.index, columns=test_result_metrics.columns)
+                             
+    for model in test_result_metrics.index:
+        better_list=[]
+        for parameter in GOOD_COLUMNS:
+            if test_result_metrics.loc[model][parameter] > test_result_metrics.loc[model_to_compare_to][parameter]:
+                better_parameters.loc[model, parameter] = "Better"
+            elif test_result_metrics.loc[model][parameter] == test_result_metrics.loc[model_to_compare_to][parameter]:
+                better_parameters.loc[model, parameter] = "Equal"
+            else:
+                better_parameters.loc[model, parameter] = "Worse"
 
-    return parameter
+        for parameter in BAD_COLUMNS:
+            if test_result_metrics.loc[model][parameter] < test_result_metrics.loc[model_to_compare_to][parameter]:
+                better_parameters.loc[model, parameter] = "Better"
+            elif test_result_metrics.loc[model][parameter] == test_result_metrics.loc[model_to_compare_to][parameter]:
+                better_parameters.loc[model, parameter] = "Equal"
+            else:
+                better_parameters.loc[model, parameter] = "Worse"
+
+    return better_parameters
 
 
 
