@@ -3,7 +3,7 @@ import numpy as np
 import os
 from EQTransformer.core.EqT_utils import cred2
 import trainer as eqtt
-from archml.helpers import resizer, result_metrics, compare
+from archml.helpers import resizer, result_metrics, comparison
 from archml.models import bilstm_closed
 
 
@@ -85,7 +85,7 @@ def test_models():
 	model = eqtt._build_model(args_dict)
 
 
-	assert len(model.layers) == 142 #97
+	assert len(model.layers) == 142
 
 
 
@@ -119,7 +119,7 @@ def test_results_metrics():
 	
 def test_compare():
 	csv = pd.read_csv("ModelsAndSampleData/test_results.csv")
-	a = compare(csv)
+	a = comparison(csv)
 	assert a == 'det_recall'
 
 
