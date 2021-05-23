@@ -11,7 +11,7 @@ def resizer(hdf5_data_path, eq_catalog_csv_path, size, output_name='resized'):
     sampeld_hdf5, sampled_eq_catalog = resize(hdf5_data, eq_catalog, size, output_name)
 
     sampled_hdf5.close()
-    sampled_eq_catalog.to_csv('{}_{}'.format(output_name, size))
+    sampled_eq_catalog.to_csv('{}_{}'.format(output_name, str(size)))
 
 def resize(hdf5_data, eq_catalog, size, output_name):
 
@@ -24,11 +24,7 @@ def resize(hdf5_data, eq_catalog, size, output_name):
     #shuffle csv to randomize trace_name order and save the resultig csv
     sampled_eq_catalog = eq_catalog.sample(frac=size//100).reset_index(drop=True)
     ev_list = sampled_eq_catalog['trace_name'].to_list()
-
-    #create a new hdf5 file
     sampled_hfd5 = h5py.File('{}_{}.hdf5'.format(output_name, size),'core')
-    
-    #create a group named 'data' inside the file
     small_data = sampled_hdf5.create_group("data")
     
     #copy the files from the original data to the new hdf5 object using the downsized event list.
@@ -56,8 +52,6 @@ def metrics(test_results_dict):
         values are pandas dataframes which contain test result csv files from EQTransformer's tester output. '''
 
     result_metrics = pd.DataFrame()
-
-
     for model in test_results_dict:
         results = []
         results.append(model)
@@ -69,7 +63,6 @@ def metrics(test_results_dict):
             event = len(earthquakes)
 
             # The model fills the catalog with NaN values when it fails to perdict.
-
             nan_pred_event = earthquakes[earthquakes["{}".format(probability)].isnull()]
             FN = len(nan_pred_event)
             TP = event-FN
@@ -78,11 +71,10 @@ def metrics(test_results_dict):
             not_event = len(noise)
 
             # The model fills the catalog with NaN values when it fails to perdict.
-
             nan_pred_noise = noise[noise["{}".format(probability)].isnull()]
             TN = len(nan_pred_noise)
             FP = not_event-TN
-                        
+
             recall = TP/(TP+FN)
             precision = TP/(TP+FP)
             
@@ -116,13 +108,13 @@ def metrics(test_results_dict):
         
     result_metrics.columns = TEST_COLUMNS
     result_metrics = result_metrics.reset_index()
-    result_metrics = result_metrics.drop("index",axis=1)
+    result_metrics = result_metrics.drop("index", axis=1)
 
     return result_metrics
 
-def comparison(test_result_metrics_csv_path, model_to_compare_to ='EQT', output_name="comparison_catalog", output_path=None)
+def comparison(test_result_metrics_csv_path, model_to_compare_to='EQT', output_name="comparison_catalog", output_path=None)
     
-    test_result_metrics = pd.read_csv(test_result_metrics_csv_path, index_col = 0)
+    test_result_metrics = pd.read_csv(test_result_metrics_csv_path, index_col=0)
     better_parameters = compare(test_result_metrics, model_to_compare_to)
     
     if output_path != None:
@@ -137,8 +129,6 @@ BAD_COLUMNS = ["d_fp","d_fn","p_fp","p_fn","s_fp","s_fn","p_mae","p_rmse","s_mae
 def compare(test_result_metrics, model_to_compare_to='EQT'):
 
     '''Takes a Pandas DataFrame object in the format of what metrics() returns'''
-    
-    test_result_metrics = test_result_metrics.set_index("model_name")
     better_parameters = pd.DataFrame(index=test_result_metrics.index, columns=test_result_metrics.columns)
                              
     for model in test_result_metrics.index:
