@@ -2,7 +2,7 @@
 import os
 from keras.models import load_model
 from EQTransformer.core.EqT_utils import f1, SeqSelfAttention, FeedForward, LayerNormalization
-import trainer as eqtt
+from archeml import trainer as eqtt
 from archeml.models import bilstm_closed
 
 

@@ -1,0 +1,4 @@
+numpy
+obspy
+eqtransformer==0.1.55
+scikit-learn
